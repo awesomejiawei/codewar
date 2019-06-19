@@ -30,3 +30,40 @@ def isPP(n):
         if b ** e == n:
             return [b, e]
     return None
+
+
+# ##Lyrics... Pyramids are amazing! Both in architectural and mathematical sense.
+# If you have a computer, you can mess with pyramids even if you are not in Egypt
+# at the time. For example, let's consider the following problem. Imagine that you have a plane
+# pyramid built of numbers, like this one here:
+#
+#    /3/
+#   \7\ 4
+#  2 \4\ 6
+# 8 5 \9\ 3
+
+def longest_slide_down(pyramid):
+    i = -2
+    curlayer = pyramid[i]
+    lastlayer = pyramid[-1]
+    #print(curlayer)
+    #print(lastlayer)
+    while abs(i) != len(pyramid):
+        tmp = []
+        for idx in range(len(curlayer)):
+            tmp.append(max(curlayer[idx] + lastlayer[idx], curlayer[idx] + lastlayer[idx + 1]))
+        lastlayer = tmp[:]
+        print(tmp)
+        i = i - 1
+        curlayer = pyramid[i]
+    return pyramid[0][0] + max(lastlayer)
+
+# Master's approach
+def longest_slide_down2(p):
+    res = p.pop()
+    while p:
+        tmp = p.pop()
+        res = [tmp[i] + max(res[i],res[i+1])  for i in range(len(tmp))]
+    return res.pop()
+# print(longest_slide_down([[3], [7, 4], [2, 4, 6], [8, 5, 9, 3]]))
+
