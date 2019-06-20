@@ -72,7 +72,7 @@ def longest_slide_down2(p):
 
 
 
-
+# 4
 # Description:
 # The rgb() method is incomplete. Complete the method so that passing in RGB decimal values
 # will result in a hexadecimal representation being returned. The valid decimal values
@@ -92,7 +92,7 @@ def rgb(r, g, b):
 
 
 
-
+# 5
 # What is an anagram? Well, two words are anagrams of each other
 # if they both contain the same letters. For example:
 # 'abba' & 'baab' == true
@@ -114,3 +114,34 @@ def anagrams(word, words):
 
 # Mater Version
 def anagrams2(word, words): return [item for item in words if sorted(item)==sorted(word)]
+
+
+
+
+# 6
+# Description:
+# You have to create a function that takes a positive integer number and returns the next bigger number formed by the same digits:
+#
+# 12 ==> 21
+# 513 ==> 531
+# 2017 ==> 2071
+# If no bigger number can be composed using those digits, return -1:
+#
+# 9 ==> -1
+# 111 ==> -1
+# 531 ==> -1
+
+def next_bigger(n):
+    s = list(str(n))
+    for i in range(len(s)-2,-1,-1):
+        if s[i] < s[i+1]:
+            t = s[i:]
+            m = min(filter(lambda x: x>t[0], t))
+            t.remove(m)
+            t.sort()
+            s[i:] = [m] + t
+            return int("".join(s))
+    return -1
+
+
+print(next_bigger(144))
