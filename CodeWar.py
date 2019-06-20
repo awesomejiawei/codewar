@@ -1,3 +1,4 @@
+#1
 # Write a function, which takes a non-negative integer (seconds) as input and returns the time in a human-readable format (HH:MM:SS)
 
 # HH = hours, padded to 2 digits, range: 00 - 99
@@ -13,6 +14,7 @@ def make_readable(seconds):
     return '{:02}:{:02}:{:02}'.format(hours, minutes, seconds)
 
 
+#2
 # Your task is to check wheter a given integer is a perfect power. If it is a perfect power,
 # return a pair m and k with mk = n as a proof. Otherwise return Nothing, Nil, null, NULL, None or your language's equivalent.
 #
@@ -32,6 +34,7 @@ def isPP(n):
     return None
 
 
+# 3
 # ##Lyrics... Pyramids are amazing! Both in architectural and mathematical sense.
 # If you have a computer, you can mess with pyramids even if you are not in Egypt
 # at the time. For example, let's consider the following problem. Imagine that you have a plane
@@ -67,3 +70,47 @@ def longest_slide_down2(p):
     return res.pop()
 # print(longest_slide_down([[3], [7, 4], [2, 4, 6], [8, 5, 9, 3]]))
 
+
+
+
+# Description:
+# The rgb() method is incomplete. Complete the method so that passing in RGB decimal values
+# will result in a hexadecimal representation being returned. The valid decimal values
+# for RGB are 0 - 255. Any (r,g,b) argument values that fall out of that range should be rounded to the closest valid value.
+#
+# The following are examples of expected output values:
+# gb(255, 255, 255) # returns FFFFFF
+# rgb(255, 255, 300) # returns FFFFFF
+# rgb(0,0,0) # returns 000000
+# rgb(148, 0, 211) # returns 9400D3
+def rgb(r, g, b):
+    round = lambda x: min(255, max(x, 0))
+    return ("{:02X}" * 3).format(round(r), round(g), round(b))
+
+# print(rgb(255,21,23))
+
+
+
+
+
+# What is an anagram? Well, two words are anagrams of each other
+# if they both contain the same letters. For example:
+# 'abba' & 'baab' == true
+#
+# 'abba' & 'bbaa' == true
+#
+# 'abba' & 'abbba' == false
+#
+# 'abba' & 'abca' == false
+from collections import Counter
+def anagrams(word, words):
+    target = Counter(word)
+    result = []
+    for oneword in words:
+        if target == Counter(oneword):
+            result.append(oneword)
+    return result
+
+
+# Mater Version
+def anagrams2(word, words): return [item for item in words if sorted(item)==sorted(word)]
