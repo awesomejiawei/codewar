@@ -166,6 +166,7 @@ def anagrams2(word, words): return [item for item in words if sorted(item)==sort
 #
 # 组合 left 和 right 形成新的数字，这就是完整的 "下一个更大的数字" 。
 
+
 def next_bigger(n):
     s = list(str(n))
     print(s)
@@ -183,4 +184,100 @@ def next_bigger(n):
     return -1
 
 
-print(next_bigger(2531433))
+#print(next_bigger(2514))
+
+
+# 7
+# Description:
+# How many ways can you make the sum of a number?
+# From wikipedia: https://en.wikipedia.org/wiki/Partition_(number_theory)#
+#
+# In number theory and combinatorics, a partition of a positive integer n,
+# also called an integer partition, is a way of writing n as a sum of positive integers.
+# Two sums that differ only in the order of their summands are considered the same partition.
+# If order matters, the sum becomes a composition. For example, 4 can be partitioned in five distinct ways:
+def exp_sum(n):
+  if n < 0:
+    return 0
+  dp = [1]+[0]*n
+  print(dp)
+  for num in range(1,n+1):
+    print('*'*20)
+    for i in range(num,n+1):
+      dp[i] += dp[i-num]
+      print(dp)
+  return dp[-1]
+
+
+def twoSum(nums,target):
+    first = 0
+    last = -1
+    nums.sort()
+    #print(nums[-1])
+    #print(nums[0])
+    while nums[first] + nums[last] != target:
+        print(first,last)
+        if nums[first] + nums[last] > target:
+            last = last - 1
+        else:
+            first = first + 1
+    return [first, last]
+
+# print(twoSum([150,24,79,50,88,345,3],200))
+
+
+
+# 8
+# He noted the PIN 1357, but he also said, it is possible that each of the
+# digits he saw could actually be another adjacent digit (horizontally or vertically,
+#                                                         but not diagonally). E.g. instead of the 1 it could also be the 2 or 4. And instead of the 5 it could also be the 2, 4, 6 or 8.
+#
+# He also mentioned, he knows this kind of locks. You can enter an unlimited
+# amount of wrong PINs, they never finally lock the system or sound the alarm.
+# That's why we can try out all possible (*) variations.
+#
+# * possible in sense of: the observed PIN itself and all variations considering the adjacent digits
+#
+# Can you help us to find all those variations? It would be nice to have a function,
+# that returns an array (or a list in Java and C#) of
+# # all variations for an observed PIN with a length of 1 to 8 digits.
+# # We could name the function getPINs (get_pins in python, GetPINs in C#).
+# # But please note that all PINs, the observed one and also the results, must be strings,
+# # because of potentially leading '0's. We already prepared some test cases for you.
+# ┌───┬───┬───┐
+# │ 1 │ 2 │ 3 │
+# ├───┼───┼───┤
+# │ 4 │ 5 │ 6 │
+# ├───┼───┼───┤
+# │ 7 │ 8 │ 9 │
+# └───┼───┼───┘
+#     │ 0 │
+#     └───┘
+import itertools
+def get_pins(observed):
+    dict_n = {"1": [1, 2, 4],
+              "2": [1, 2, 3, 5],
+              "3": [2, 3, 6],
+              "4": [1, 4, 5, 7],
+              "5": [2, 4, 5, 6, 8],
+              "6": [3, 5, 6, 9],
+              "7": [4, 7, 8],
+              "8": [5, 7, 8, 9, 0],
+              "9": [6, 8, 9],
+              "0": [8, 0]}  # 建立对应关系的字典
+    num = []
+    r_num = []
+    for i in observed:
+        num.append(dict_n[i])  # 根据键找值,存入num列表
+    #print(num)
+    result_num = list(itertools.product(*num))  # 生成全排列元组,存入列表
+    print(result_num)
+    for n in result_num:
+        for m in n:
+            r_num.append(str(m))
+    r_num = "".join(r_num)  # 拼接在一起
+    print(r_num)
+    result = [r_num[i:i+len(observed)] for i in range(0, len(r_num), len(observed))]  # 按固定长度输出
+    return result
+
+print(get_pins('11'))
