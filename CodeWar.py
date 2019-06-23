@@ -301,3 +301,30 @@ def divisors(num):
         return str(num) + " is prime"
     return l
 
+#10
+# The goal of this exercise is to convert a string to a new string where each
+# character in the new string is "(" if that character appears only once in the
+# original string, or ")" if that character appears more than once in the original string. Ignore capitalization when determining if a character is a duplicate.
+#
+# Examples
+# "din"      =>  "((("
+# "recede"   =>  "()()()"
+# "Success"  =>  ")())())"
+# "(( @"     =>  "))(("
+
+
+from collections import Counter
+def duplicate_encode(word):
+    word = word.lower()
+    wd = Counter(word)
+    result = []
+    for letter in word:
+        if wd[letter] > 1:
+            result.append(')')
+        else:
+            result.append('(')
+    return ''.join(result)
+
+#mater
+def duplicate_encode2(word):
+    return "".join(["(" if word.lower().count(c) == 1 else ")" for c in word.lower()])
